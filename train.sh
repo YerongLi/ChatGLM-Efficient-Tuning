@@ -10,5 +10,6 @@ python src/train_sft.py \
     --save_steps 50 \
     --learning_rate 5e-5 \
     --num_train_epochs 3.0 \
+    --fp16    
     # --quantization_bit 4 \
-    --fp16
+
