@@ -74,7 +74,7 @@ def main():
         if query.strip() == "clear":
             history = original_history.copy()
             os.system(clear_command)
-            # print(welcome)
+            print(welcome)
             continue
 
         count = 0
@@ -89,7 +89,7 @@ def main():
                     print(build_prompt(history), flush=True)
                     signal.signal(signal.SIGINT, signal_handler)
         os.system(clear_command)
-        print(build_prompt(history), flush=True)
+        # print(build_prompt(history), flush=True)
 
 
 if __name__ == "__main__":
