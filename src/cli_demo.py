@@ -6,6 +6,7 @@
 
 import os
 import torch
+import random
 import signal
 import platform
 
@@ -80,7 +81,7 @@ def main():
             continue
 
         count = 0
-        for _, history in model.stream_chat(tokenizer, query, history=[buffered_history[0]]+(buffered_history + history)[:-4], **generating_args.to_dict()):
+        for _, history in model.stream_chat(tokenizer, query, history=([random.choice.(buffered_history)] + history)[:-4], **generating_args.to_dict()):
             if stop_stream:
                 stop_stream = False
                 break
