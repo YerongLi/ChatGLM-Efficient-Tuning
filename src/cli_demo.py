@@ -59,7 +59,7 @@ def main():
         ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
     ]
     history = original_history.copy()
-    print(welcome)
+    # print(welcome)
     while True:
         try:
             query = input("\nInput: ")
@@ -74,7 +74,7 @@ def main():
         if query.strip() == "clear":
             history = original_history.copy()
             os.system(clear_command)
-            print(welcome)
+            # print(welcome)
             continue
 
         count = 0
