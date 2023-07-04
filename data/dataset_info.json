@@ -117,5 +117,15 @@
       "response": "output",
       "history": "history"
     }
+  },
+
+    "harry_potter": {
+    "file_name": "harry_potter.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "",
+      "response": "output",
+      "history": "history"
+    }
   }
 }
