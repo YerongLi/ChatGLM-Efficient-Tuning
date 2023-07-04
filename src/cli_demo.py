@@ -80,7 +80,7 @@ def main():
             continue
 
         count = 0
-        for _, history in model.stream_chat(tokenizer, query, history=(buffered_history + history).[:-6], **generating_args.to_dict()):
+        for _, history in model.stream_chat(tokenizer, query, history=(buffered_history + history)[:-6], **generating_args.to_dict()):
             if stop_stream:
                 stop_stream = False
                 break
