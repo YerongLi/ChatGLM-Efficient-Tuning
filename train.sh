@@ -1,8 +1,8 @@
 python src/train_sft.py \
     --do_train \
-    --dataset elon_musk \
+    --dataset harry_potter \
     --finetuning_type lora \
-    --output_dir elon_musk \
+    --output_dir harry_potter \
     --per_device_train_batch_size 8 \
     --gradient_accumulation_steps 2 \
     --lr_scheduler_type cosine \
