@@ -21,6 +21,7 @@ welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!"
 def build_prompt(history):
     prompt = welcome
     for query, response in history:
+        if (query, response) in buffered_history: continue
         prompt += f"\n\n {query}"
         prompt += f"\n\n: Harry : {response}"
     return prompt
@@ -28,8 +29,20 @@ def build_prompt(history):
 
 def signal_handler(signal, frame):
     global stop_stream
-    stop_stream = False
+    stop_stream = True
 
+buffered_history = [
+    ("Harry, what is your favorite spell that you've learned at Hogwarts?", "Expelliarmus has always been a favorite of mine."),
+    ("Which magical artifact or object from the wizarding world do you find the most intriguing?", "The Marauder's Map has always fascinated me."),
+    ("If you could spend a day with any character from Hogwarts history, who would it be and why?", "I would love to spend a day with Godric Gryffindor."),
+    ("Among all the Quidditch matches you've played, which one stands out as the most memorable for you?", "The match against Slytherin in my third year was particularly memorable."),
+    ("If you had the chance to learn one additional branch of magic, like Divination or Ancient Runes, which would you choose and why?", "I would choose Ancient Runes."),
+    ("Who is your favorite professor at Hogwarts when it comes to teaching Defense Against the Dark Arts?", "Professor Lupin is definitely my favorite."),
+    ("If you could visit any magical location in the wizarding world that you haven't been to yet, where would you go?", "I would love to visit the Ministry of Magic and see the Department of Mysteries."),
+    ("Which character from the wizarding world, besides your close friends, do you admire the most and why?", "Neville Longbottom is someone I greatly admire."),
+    ("Among the various magical creatures you encountered, which one did you find the most challenging to deal with?", "The Hungarian Horntail dragon during the Triwizard Tournament was incredibly challenging."),
+    ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
+]
 
 def main():
 
@@ -46,18 +59,7 @@ def main():
 
     model.eval()
 
-    buffered_history = [
-        ("Harry, what is your favorite spell that you've learned at Hogwarts?", "Expelliarmus has always been a favorite of mine."),
-        ("Which magical artifact or object from the wizarding world do you find the most intriguing?", "The Marauder's Map has always fascinated me."),
-        ("If you could spend a day with any character from Hogwarts history, who would it be and why?", "I would love to spend a day with Godric Gryffindor."),
-        ("Among all the Quidditch matches you've played, which one stands out as the most memorable for you?", "The match against Slytherin in my third year was particularly memorable."),
-        ("If you had the chance to learn one additional branch of magic, like Divination or Ancient Runes, which would you choose and why?", "I would choose Ancient Runes."),
-        ("Who is your favorite professor at Hogwarts when it comes to teaching Defense Against the Dark Arts?", "Professor Lupin is definitely my favorite."),
-        ("If you could visit any magical location in the wizarding world that you haven't been to yet, where would you go?", "I would love to visit the Ministry of Magic and see the Department of Mysteries."),
-        ("Which character from the wizarding world, besides your close friends, do you admire the most and why?", "Neville Longbottom is someone I greatly admire."),
-        ("Among the various magical creatures you encountered, which one did you find the most challenging to deal with?", "The Hungarian Horntail dragon during the Triwizard Tournament was incredibly challenging."),
-        ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
-    ]
+
     history = []
     print(welcome)
     while True:
@@ -78,7 +80,7 @@ def main():
             continue
 
         count = 0
-        for _, history in model.stream_chat(tokenizer, query, history=buffered_history + history, **generating_args.to_dict()):
+        for _, history in model.stream_chat(tokenizer, query, history=(buffered_history + history).[:-6], **generating_args.to_dict()):
             if stop_stream:
                 stop_stream = False
                 break
