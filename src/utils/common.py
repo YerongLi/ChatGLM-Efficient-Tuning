@@ -482,7 +482,7 @@ def preprocess_data(
                 query, answer = examples["prompt"][i], examples["response"][i]
                 query = query + examples["query"][i] if examples["query"][i] else query
                 history = examples["history"][i] if examples["history"][i] else []
-                prompt = "Welcome Harry Potter!"
+                prompt = "Welcome, Harry Potter, the great wizard from Hogwarts !"
                 for j, (old_query, response) in enumerate(history):
                     prompt += "[Round {}]\n\n问：{}\n\n答：{}\n\n".format(j+1, old_query, response)
                 prompt += "[Round {}]\n\n问：{}\n\n答：".format(len(history)+1, query)

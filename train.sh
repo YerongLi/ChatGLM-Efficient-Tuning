@@ -3,7 +3,7 @@ python src/train_sft.py \
     --dataset harry_potter \
     --finetuning_type lora \
     --output_dir harry_potter \
-    --per_device_train_batch_size 8 \
+    --per_device_train_batch_size 10 \
     --gradient_accumulation_steps 2 \
     --lr_scheduler_type cosine \
     --logging_steps 10 \
