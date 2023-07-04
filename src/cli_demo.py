@@ -45,6 +45,22 @@ buffered_history = [
     ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
 ]
 
+def truncate_history(history):
+    total_words = 0
+    selected_history = []
+
+    for i in range(len(history)-1, -1, -1):
+        question, answer = history[i]
+        words = len(question.split()) + len(answer.split())
+
+        if total_words + words <= 1800:
+            selected_history.append((question, answer))
+            total_words += words
+        else:
+            break
+
+    return selected_history
+
 def main():
 
     global stop_stream
@@ -79,7 +95,7 @@ def main():
             os.system(clear_command)
             print(welcome)
             continue
-
+        history = truncate_history(history)
         count = 0
         for _, history in model.stream_chat(tokenizer, query, history=history, **generating_args.to_dict()):
             if stop_stream:
