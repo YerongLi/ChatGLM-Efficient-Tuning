@@ -1,4 +1,4 @@
-CUDA_VISIBLE_DEVICES=0,1,2,3 python src/train_sft.py \
+python src/train_sft.py \
     --do_train \
     --dataset elon_musk \
     --finetuning_type lora \
