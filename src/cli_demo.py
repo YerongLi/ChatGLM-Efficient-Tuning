@@ -15,7 +15,7 @@ from utils import prepare_infer_args, auto_configure_device_map, load_pretrained
 os_name = platform.system()
 clear_command = "cls" if os_name == "Windows" else "clear"
 stop_stream = False
-welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!"
+welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!\n\nWhat's your name?\n\nI am Harry Potter"
 
 
 def build_prompt(history):
@@ -47,7 +47,7 @@ def main():
     model.eval()
 
     history = []
-    print(welcome)
+    # print(welcome)
     while True:
         try:
             query = input("\nInput: ")
