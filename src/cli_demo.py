@@ -15,14 +15,14 @@ from utils import prepare_infer_args, auto_configure_device_map, load_pretrained
 os_name = platform.system()
 clear_command = "cls" if os_name == "Windows" else "clear"
 stop_stream = False
-welcome = "欢迎使用 ChatGLM-6B 模型，输入内容即可对话，clear清空对话历史，stop终止程序"
+welcome = "Welcome, Harry Potter, the great wizard from Hogwarts !"
 
 
 def build_prompt(history):
     prompt = welcome
     for query, response in history:
-        prompt += f"\n\nUser: {query}"
-        prompt += f"\n\nChatGLM-6B: {response}"
+        prompt += f"\n\n {query}"
+        prompt += f"\n\n: Harry : {response}"
     return prompt
 
 
