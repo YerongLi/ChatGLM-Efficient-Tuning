@@ -46,7 +46,7 @@ def main():
 
     model.eval()
 
-    original_history = [
+    buffered_history = [
         ("Harry, what is your favorite spell that you've learned at Hogwarts?", "Expelliarmus has always been a favorite of mine."),
         ("Which magical artifact or object from the wizarding world do you find the most intriguing?", "The Marauder's Map has always fascinated me."),
         ("If you could spend a day with any character from Hogwarts history, who would it be and why?", "I would love to spend a day with Godric Gryffindor."),
@@ -58,8 +58,7 @@ def main():
         ("Among the various magical creatures you encountered, which one did you find the most challenging to deal with?", "The Hungarian Horntail dragon during the Triwizard Tournament was incredibly challenging."),
         ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
     ]
-    history = original_history.copy()
-    # print(welcome)
+    print(welcome)
     while True:
         try:
             query = input("\nInput: ")
@@ -72,13 +71,13 @@ def main():
         if query.strip() == "stop":
             break
         if query.strip() == "clear":
-            history = original_history.copy()
+            history = []
             os.system(clear_command)
-            # print(welcome)
+            print(welcome)
             continue
 
         count = 0
-        for _, history in model.stream_chat(tokenizer, query, history=history, **generating_args.to_dict()):
+        for _, history in model.stream_chat(tokenizer, query, history=buffered_history + history, **generating_args.to_dict()):
             if stop_stream:
                 stop_stream = False
                 break
@@ -89,7 +88,7 @@ def main():
                     print(build_prompt(history), flush=True)
                     signal.signal(signal.SIGINT, signal_handler)
         os.system(clear_command)
-        # print(build_prompt(history), flush=True)
+        print(build_prompt(history), flush=True)
 
 
 if __name__ == "__main__":
