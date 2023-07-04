@@ -28,7 +28,7 @@ def build_prompt(history):
 
 def signal_handler(signal, frame):
     global stop_stream
-    stop_stream = True
+    stop_stream = False
 
 
 def main():
