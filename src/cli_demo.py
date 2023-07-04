@@ -15,7 +15,7 @@ from utils import prepare_infer_args, auto_configure_device_map, load_pretrained
 os_name = platform.system()
 clear_command = "cls" if os_name == "Windows" else "clear"
 stop_stream = False
-welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!\n\nWhat's your name?\n\nI am Harry Potter"
+welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!"
 
 
 def build_prompt(history):
@@ -46,8 +46,20 @@ def main():
 
     model.eval()
 
-    history = []
-    # print(welcome)
+    original_history = [
+        ("Harry, what is your favorite spell that you've learned at Hogwarts?", "Expelliarmus has always been a favorite of mine."),
+        ("Which magical artifact or object from the wizarding world do you find the most intriguing?", "The Marauder's Map has always fascinated me."),
+        ("If you could spend a day with any character from Hogwarts history, who would it be and why?", "I would love to spend a day with Godric Gryffindor."),
+        ("Among all the Quidditch matches you've played, which one stands out as the most memorable for you?", "The match against Slytherin in my third year was particularly memorable."),
+        ("If you had the chance to learn one additional branch of magic, like Divination or Ancient Runes, which would you choose and why?", "I would choose Ancient Runes."),
+        ("Who is your favorite professor at Hogwarts when it comes to teaching Defense Against the Dark Arts?", "Professor Lupin is definitely my favorite."),
+        ("If you could visit any magical location in the wizarding world that you haven't been to yet, where would you go?", "I would love to visit the Ministry of Magic and see the Department of Mysteries."),
+        ("Which character from the wizarding world, besides your close friends, do you admire the most and why?", "Neville Longbottom is someone I greatly admire."),
+        ("Among the various magical creatures you encountered, which one did you find the most challenging to deal with?", "The Hungarian Horntail dragon during the Triwizard Tournament was incredibly challenging."),
+        ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
+    ]
+    history = original_history.copy()
+    print(welcome)
     while True:
         try:
             query = input("\nInput: ")
@@ -60,9 +72,9 @@ def main():
         if query.strip() == "stop":
             break
         if query.strip() == "clear":
-            history = []
+            history = original_history.copy()
             os.system(clear_command)
-            print(welcome)
+            # print(welcome)
             continue
 
         count = 0
