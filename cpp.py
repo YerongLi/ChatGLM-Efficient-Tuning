@@ -31,8 +31,9 @@ def main():
     print(input_string)
 
     command = ["./build/bin/main", "-m", "chatglm-ggml.bin", "-p", input_string]
+    welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!"
 
-    stdout, stderr = run_command_with_input(command, buffered_string+input_string)
+    stdout, stderr = run_command_with_input(command, welcome=buffered_string+input_string)
     if stdout:
         print("Standard Output:")
         print(stdout)
