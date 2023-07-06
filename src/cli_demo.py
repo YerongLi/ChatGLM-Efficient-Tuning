@@ -86,7 +86,7 @@ def main():
                 break
             else:
                 count += 1
-                if count % 8 == 0:
+                if count % 10 == 0:
                     os.system(clear_command)
                     print(build_prompt(history), flush=True)
                     signal.signal(signal.SIGINT, signal_handler)
