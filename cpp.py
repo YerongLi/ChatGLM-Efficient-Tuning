@@ -26,7 +26,7 @@ def run_command_with_input(command, input_string):
 
 def main():
     # input_string = input("Enter a string: ")
-    input_string = "Hi, what's your name, Harry?"
+    input_string = "Hi, what's your name?"
     print('Question')
     print(input_string)
 
