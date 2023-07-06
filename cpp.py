@@ -6,7 +6,7 @@ buffered_history = [
     ("Among all the Quidditch matches you've played, which one stands out as the most memorable for you?", "The match against Slytherin in my third year was particularly memorable.")
 ]
 
-buffered_string = '\n'.join([f'{question}\n{answer}' for question, answer in history])
+buffered_string = '\n'.join([f'{question}\n{answer}' for question, answer in buffered_history])
 def run_command_with_input(command, input_string):
     process = subprocess.Popen(
         command,
