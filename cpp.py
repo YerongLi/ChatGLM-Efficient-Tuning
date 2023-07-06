@@ -12,7 +12,7 @@ buffered_history = [
     ("If you could give one piece of advice to young witches and wizards starting their magical education, what would it be?", "I would advise them to believe in themselves and not be afraid to ask for help when needed.")
 ]
 
-buffered_string = '\n'.join([f'{question}\n{answer}' for question, answer in buffered_history])
+buffered_string = '\n\n'.join([f'{question}\n\n{answer}' for question, answer in buffered_history])
 def run_command_with_input(command, input_string):
     process = subprocess.Popen(
         command,
@@ -31,9 +31,9 @@ def main():
     print(input_string)
 
     command = ["./build/bin/main", "-m", "chatglm-ggml.bin", "-p", input_string]
-    welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!"
+    welcome = "Welcome, Harry Potter, the greatest wizard from Hogwarts!\n\n"
 
-    stdout, stderr = run_command_with_input(command, welcome=buffered_string+input_string)
+    stdout, stderr = run_command_with_input(command, welcome+buffered_string+input_string)
     if stdout:
         print("Standard Output:")
         print(stdout)
