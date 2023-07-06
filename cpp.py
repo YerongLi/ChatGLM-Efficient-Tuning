@@ -25,7 +25,8 @@ def run_command_with_input(command, input_string):
     return stdout, stderr
 
 def main():
-    input_string = input("Enter a string: ")
+    # input_string = input("Enter a string: ")
+    inpput_string = 'Hi Harry'
 
     command = ["./build/bin/main", "-m", "chatglm-ggml.bin", "-p", input_string]
 
