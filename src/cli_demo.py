@@ -97,6 +97,7 @@ def main():
             continue
         history = truncate_history(history)
         count = 0
+        print(type(model))
         for _, history in model.stream_chat(tokenizer, query, history=history, **generating_args.to_dict()):
             if stop_stream:
                 stop_stream = False
