@@ -9,7 +9,7 @@ import torch
 import random
 import signal
 import platform
-
+from fastllm_pytools import llm
 from utils import prepare_infer_args, auto_configure_device_map, load_pretrained
 
 
@@ -66,6 +66,7 @@ def main():
     global stop_stream
     model_args, finetuning_args, generating_args = prepare_infer_args()
     model, tokenizer = load_pretrained(model_args, finetuning_args)
+    model = llm.from_hf(model, tokenizer, dtype = "float16") # dtype支持float16, float32, float64, int32, int64, bool
 
     if torch.cuda.device_count() > 1:
         from accelerate import dispatch_model
@@ -73,7 +74,6 @@ def main():
         model = dispatch_model(model, device_map)
     else:
         model = model.cuda()
-
     model.eval()
 
 
