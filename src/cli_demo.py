@@ -66,7 +66,6 @@ def main():
     global stop_stream
     model_args, finetuning_args, generating_args = prepare_infer_args()
     model, tokenizer = load_pretrained(model_args, finetuning_args)
-    model = llm.from_hf(model, tokenizer, dtype = "int4") # dtype支持float16, float32, float64, int32, int64, bool
 
     if torch.cuda.device_count() > 1:
         from accelerate import dispatch_model
@@ -74,6 +73,8 @@ def main():
         model = dispatch_model(model, device_map)
     else:
         model = model.cuda()
+    model = llm.from_hf(model, tokenizer, dtype = "int4") # dtype支持float16, float32, float64, int32, int64, bool
+    
     model.eval()
 
 
