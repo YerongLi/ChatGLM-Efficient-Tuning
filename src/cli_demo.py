@@ -75,7 +75,7 @@ def main():
         model = model.cuda()
     model.eval()
     model = llm.from_hf(model, tokenizer, dtype = "int4") # dtype支持float16, float32, float64, int32, int64, bool
-
+    model.save("model.flm")
 
 
     history = buffered_history.copy()
