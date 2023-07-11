@@ -73,9 +73,9 @@ def main():
         model = dispatch_model(model, device_map)
     else:
         model = model.cuda()
-    model = llm.from_hf(model, tokenizer, dtype = "int4") # dtype支持float16, float32, float64, int32, int64, bool
-    
     model.eval()
+    model = llm.from_hf(model, tokenizer, dtype = "int4") # dtype支持float16, float32, float64, int32, int64, bool
+
 
 
     history = buffered_history.copy()
