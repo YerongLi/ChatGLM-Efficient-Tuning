@@ -9,7 +9,6 @@ import torch
 import random
 import signal
 import platform
-from fastllm_pytools import llm
 from utils import prepare_infer_args, auto_configure_device_map, load_pretrained
 
 
@@ -74,8 +73,6 @@ def main():
     else:
         model = model.cuda()
     model.eval()
-    model = llm.from_hf(model, tokenizer, dtype = "int4") # dtype支持float16, float32, float64, int32, int64, bool
-    model.save("model.flm")
 
 
     history = buffered_history.copy()
@@ -99,7 +96,7 @@ def main():
         history = truncate_history(history)
         count = 0
         print(type(model))
-        for _, history in model.stream_chat(tokenizer, query, history=history, **generating_args.to_dict()):
+        for _, history in model.stream_chat(tokenizer, query, history=history,**generating_args.to_dict()):
             if stop_stream:
                 stop_stream = False
                 break
